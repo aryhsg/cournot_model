@@ -5,7 +5,7 @@ setup(
     version='1.0.0',
     author='Yang, Ching-Yu',
     author_email='kevin81815@email.com',
-    description='Description of your package',
+    description='Test',
     packages=find_packages(),
     install_requires=[
         'numpy',
