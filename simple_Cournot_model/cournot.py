@@ -24,11 +24,10 @@ class Cournot:
                 foc = diff(self.pf[i], self.firm[i].q)
                 self.reaction_list.append(foc)
             self.reaction_list_generated = True
-            return self.reaction_list
         else:
             self.reaction_list_generated = False
             self.reaction_list = []
-            
+
         for i in range(len(self.firm)):
             foc = diff(self.pf[i], self.firm[i].q)
             self.reaction_list.append(foc)
