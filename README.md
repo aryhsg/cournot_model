@@ -13,19 +13,25 @@
 ```
 ## 使用說明
 
-使用 `Firm <class>` 和 `Cournot <class>`。
+首先必須先引入模組：
+```bash
+   from simple_Cournot_model.firm import Firm
+   from simple_Cournot_model.cournot import Cournot
+```
 
-例如:
+接著介紹 `Firm <class>` 和 `Cournot <class>`的使用方式。
+
+在 `Firm <class>`，有兩個欄位需要輸入，分別為**q**以及**cost_func**。
 ```bash
    apple = Firm(q= "x", cost_func = "200+10*x")
 ```
-其中，`q` 表示該企業成本函數方程式所欲使用的代數符號，`cost_func` 則須輸入該企業之成本函數。 
+其中，**q** 表示該企業成本函數方程式所欲使用的代數符號，**cost_func** 則須輸入該企業之成本函數。
+
+而`Cournot <class>` 則須輸入兩家競爭的企業，以list方式輸入；**mkt_demand_func** 則須輸入兩企業共同面對的市場需求函數，以字串形式輸入。    
 
 ```bash
    cournot = Cournot(firm: list, mkt_demand_func: str)
 ```
-
-此處的`Cournot <class>` 則須輸入兩家競爭的企業，以list方式輸入；`mkt_demand_func` 則須輸入兩企業共同面對的市場需求函數，以字串形式輸入。
 
 在`Cournot <class>` 中，設置了幾個`method`，分別為`.profit()`，`.reaction_func()`，`.equilibrium()`以及`.figure()`。
 
