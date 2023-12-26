@@ -10,12 +10,21 @@ class Cournot:
         self.P_inverse = self.p_intercept + self.p_slope * (self.firm[0].q + self.firm[1].q)
         self.pf = []
         self.reaction_list = []
+        self.profit_list_generated = False
         self.reaction_list_generated = False
 
     def profit(self):
-        for i in range(len(self.firm)):
-            pi = self.P_inverse * self.firm[i].q - self.firm[i].cost()
-            self.pf.append(pi)
+        if self.profit_list_generated == False:
+            for i in range(len(self.firm)):
+                pi = self.P_inverse * self.firm[i].q - self.firm[i].cost()
+                self.pf.append(pi)
+        else:
+            self.profit_list_generated = False
+            self.profit_list_generated = []
+            for i in range(len(self.firm)):
+                pi = self.P_inverse * self.firm[i].q - self.firm[i].cost()
+                self.pf.append(pi)
+
         return self.pf
 
     def reaction_func(self):
