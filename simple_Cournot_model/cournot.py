@@ -10,6 +10,7 @@ class Cournot:
         self.P_inverse = self.p_intercept + self.p_slope * (self.firm[0].q + self.firm[1].q)
         self.pf = []
         self.reaction_list = []
+        self.reaction_list_generated = False
 
     def profit(self):
         for i in range(len(self.firm)):
@@ -18,10 +19,22 @@ class Cournot:
         return self.pf
 
     def reaction_func(self):
+        if self.reaction_list_generated == False:
+            for i in range(len(self.firm)):
+                foc = diff(self.pf[i], self.firm[i].q)
+                self.reaction_list.append(foc)
+            self.reaction_list_generated = True
+            return self.reaction_list
+        else:
+            self.reaction_list_generated = False
+            self.reaction_list = []
+            
         for i in range(len(self.firm)):
             foc = diff(self.pf[i], self.firm[i].q)
             self.reaction_list.append(foc)
+        self.reaction_list_generated = True
         return self.reaction_list
+
 
     def equilibrium(self):
         solution = solve((self.reaction_list[0], self.reaction_list[1]), (self.firm[0].q, self.firm[1].q))
