@@ -3,11 +3,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 class Cournot:
-    def __init__(self, firm: list, p_intercept, p_slope):
+    def __init__(self, firm: list, mkt_demand_func: str):
         self.firm = firm
-        self.p_intercept = p_intercept
-        self.p_slope = p_slope
-        self.P_inverse = self.p_intercept + self.p_slope * (self.firm[0].q + self.firm[1].q)
+        self.mkt_demand_func = sympify(mkt_demand_func)
         self.pf = []
         self.reaction_list = []
         self.profit_list_generated = False
@@ -17,7 +15,7 @@ class Cournot:
     def profit(self):
         if self.profit_list_generated == False:
             for i in range(len(self.firm)):
-                pi = self.P_inverse * self.firm[i].q - self.firm[i].cost()
+                pi = self.mkt_demand_func * self.firm[i].q - self.firm[i].cost()
                 self.pf.append(pi)
             self.profit_list_generated = True
 
@@ -38,8 +36,13 @@ class Cournot:
         return self.result
 
     def figure(self):
-        q1_vals = np.linspace(0, 5000, 100)
-        q2_vals = np.linspace(0, 5000, 100)
+        upper_bound1  = float(self.result[self.firm[0].q]) + 500
+        lower_bound1 = float(self.result[self.firm[0].q]) - 500
+        upper_bound2  = float(self.result[self.firm[1].q]) + 500
+        lower_bound2 = float(self.result[self.firm[1].q]) - 500
+
+        q1_vals = np.linspace(lower_bound1 , upper_bound1, 100)
+        q2_vals = np.linspace(lower_bound2, upper_bound2, 100)
 
         Q1, Q2 = np.meshgrid(q1_vals, q2_vals)
 
@@ -52,10 +55,10 @@ class Cournot:
         Z2 = FOC2(Q1, Q2)
 
         # Plot contours for the two equations
-        plt.contour(Q1, Q2, Z1, levels=[0], colors='r', label='reaction1')
-        plt.contour(Q1, Q2, Z2, levels=[0], colors='b', label='reaction2')
+        plt.contour(Q1, Q2, Z1, levels=[0], colors='r')
+        plt.contour(Q1, Q2, Z2, levels=[0], colors='b')
 
         plt.xlabel('Firm 1 Quantity')
         plt.ylabel('Firm 2 Quantity')
-        plt.legend(title=("reaction1", "reaction2"))
+
         plt.show()

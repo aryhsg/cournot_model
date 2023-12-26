@@ -1,11 +1,10 @@
 from sympy import *
 
 class Firm:
-    def __init__(self, fix_cost:int , marginal_cost:int , q: str):
-        self.fix_cost = fix_cost
-        self.marginal_cost = marginal_cost
+    def __init__(self, q: str, cost_func: str):
         self.q = symbols(q)
+        self.cost_func = cost_func
 
     def cost(self):
-        cost_func = self.fix_cost + self.marginal_cost * self.q
-        return cost_func
+        cost_function = sympify(self.cost_func)
+        return cost_function
