@@ -12,6 +12,7 @@ class Cournot:
         self.reaction_list = []
         self.profit_list_generated = False
         self.reaction_list_generated = False
+        self.result = {}
 
     def profit(self):
         if self.profit_list_generated == False:
@@ -28,13 +29,13 @@ class Cournot:
                 foc = diff(self.pf[i], self.firm[i].q)
                 self.reaction_list.append(foc)
             self.reaction_list_generated = True
-            
+
         return self.reaction_list
 
 
     def equilibrium(self):
-        solution = solve((self.reaction_list[0], self.reaction_list[1]), (self.firm[0].q, self.firm[1].q))
-        return solution
+        self.result = solve((self.reaction_list[0], self.reaction_list[1]), (self.firm[0].q, self.firm[1].q))
+        return self.result
 
     def figure(self):
         q1_vals = np.linspace(0, 5000, 100)
