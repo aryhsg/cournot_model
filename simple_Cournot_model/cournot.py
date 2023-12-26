@@ -20,7 +20,7 @@ class Cournot:
                 self.pf.append(pi)
         else:
             self.profit_list_generated = False
-            self.profit_list_generated = []
+            self.pf = []
             for i in range(len(self.firm)):
                 pi = self.P_inverse * self.firm[i].q - self.firm[i].cost()
                 self.pf.append(pi)
