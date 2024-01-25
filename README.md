@@ -9,7 +9,7 @@
 ## 安裝
 
    ```bash
-   pip install git+https://github.com/aryhsg/simple-cournot-model.git@v1.0.12
+   pip install git+https://github.com/aryhsg/simple_Cournot_model.git@v1.0.12
 ```
 ## 使用說明
 
